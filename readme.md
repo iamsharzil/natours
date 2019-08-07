@@ -1,4 +1,4 @@
-#Natous Application
+#Natours Application
 
 Built using modern technologies
   -Nodejs

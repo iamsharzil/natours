@@ -55,17 +55,17 @@ exports.getAccount = (req, res) => {
 
 exports.getMyTours = catchAsync(async (req, res, next) => {
   //1) Find all bookings
-  const bookings = await Booking.find({ user: req.user.id }).populate({
-    path: 'tour'
-  });
+  // const bookings = await Booking.find({ user: req.user.id }).populate({
+  // path: 'tour'
+  // });
 
   // //2) Find tours with the returned IDs
-  const tours = await bookings.map(el => el.tour);
+  // const tours = await bookings.map(el => el.tour);
 
   //Using Manual Method
-  // const bookings = await Booking.find({user: req.user.id})
-  // const tourIDs = await bookings.map(el=> el.tour)
-  // const tours = await Tour.find({ _id: { $in: tourIDs } });
+  const bookings = await Booking.find({ user: req.user.id });
+  const tourIDs = await bookings.map(el => el.tour);
+  const tours = await Tour.find({ _id: { $in: tourIDs } });
 
   res.status(200).render('overview', {
     title: 'My Tours',
